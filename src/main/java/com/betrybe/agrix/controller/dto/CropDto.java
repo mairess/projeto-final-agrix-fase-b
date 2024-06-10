@@ -1,11 +1,19 @@
 package com.betrybe.agrix.controller.dto;
 
 import com.betrybe.agrix.entity.Crop;
+import java.time.LocalDate;
 
 /**
  * The type Crop dto.
  */
-public record CropDto(Long id, String name, double plantedArea, Long farmId) {
+public record CropDto(
+    Long id,
+    String name,
+    double plantedArea,
+    LocalDate plantedDate,
+    LocalDate harvestDate,
+    Long farmId
+) {
 
   /**
    * From entity crop dto.
@@ -18,6 +26,8 @@ public record CropDto(Long id, String name, double plantedArea, Long farmId) {
         crop.getId(),
         crop.getName(),
         crop.getPlantedArea(),
+        crop.getPlantedDate(),
+        crop.getHarvestDate(),
         crop.getFarm().getId()
     );
   }
