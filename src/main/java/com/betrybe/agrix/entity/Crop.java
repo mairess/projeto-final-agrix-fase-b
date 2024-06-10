@@ -1,14 +1,17 @@
 package com.betrybe.agrix.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * The type Crop.
@@ -30,8 +33,15 @@ public class Crop {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String name;
+
   private double plantedArea;
+
+  @ManyToMany(mappedBy = "crops")
+  @JsonIgnore
+  private List<Fertilizer> fertilizers;
+
   @ManyToOne
   @JoinColumn(name = "farm_id")
   private Farm farm;
