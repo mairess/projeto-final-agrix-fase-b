@@ -38,6 +38,13 @@ public class Fertilizer {
 
   /**
    * Instantiates a new Fertilizer.
+   */
+  public Fertilizer() {
+
+  }
+
+  /**
+   * Instantiates a new Fertilizer.
    *
    * @param name        the name
    * @param brand       the brand
