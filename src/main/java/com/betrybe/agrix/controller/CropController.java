@@ -9,10 +9,12 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -66,6 +68,23 @@ public class CropController {
     return CropDto.fromEntity(
         cropService.findById(cropId)
     );
+  }
+
+  /**
+   * Harvest date at crops list.
+   *
+   * @param start the start
+   * @param end   the end
+   * @return the list
+   */
+  @GetMapping("/search")
+  public List<CropDto> harvestDateAtCrops(
+      @RequestParam LocalDate start,
+      @RequestParam LocalDate end) {
+    List<Crop> allCrops = cropService.findExpiresAtProducts(start, end);
+    return allCrops.stream()
+        .map(CropDto::fromEntity)
+        .toList();
   }
 
 }
