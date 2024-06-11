@@ -1,7 +1,5 @@
 package com.betrybe.agrix.controller;
 
-import com.betrybe.agrix.controller.dto.CropDto;
-import com.betrybe.agrix.controller.dto.FarmDto;
 import com.betrybe.agrix.controller.dto.FertilizerCreationDto;
 import com.betrybe.agrix.controller.dto.FertilizerDto;
 import com.betrybe.agrix.entity.Fertilizer;
@@ -72,7 +70,9 @@ public class FertilizerController {
   @ApiResponse(
       responseCode = "200",
       description = "All fertilizers",
-      content = @Content(array = @ArraySchema(schema = @Schema(implementation = FarmDto.class))))
+      content = @Content(array = @ArraySchema(
+          schema = @Schema(implementation = FertilizerDto.class
+          ))))
   public List<FertilizerDto> allFertilizers() {
     List<Fertilizer> allFertilizers = fertilizerService.allFertilizers();
     return allFertilizers.stream().map(FertilizerDto::fromEntity).toList();
@@ -90,7 +90,7 @@ public class FertilizerController {
   @ApiResponse(
       responseCode = "201",
       description = "Created fertilizer",
-      content = @Content(schema = @Schema(implementation = CropDto.class)))
+      content = @Content(schema = @Schema(implementation = FertilizerDto.class)))
   public FertilizerDto createFertilizer(@RequestBody FertilizerCreationDto fertilizerCreationDto) {
     return FertilizerDto.fromEntity(
         fertilizerService.create(fertilizerCreationDto.toEntity())
