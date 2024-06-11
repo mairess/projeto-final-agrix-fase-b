@@ -80,15 +80,6 @@ public class Farm {
   }
 
   /**
-   * Sets size.
-   *
-   * @param size the size
-   */
-  public void setSize(double size) {
-    this.size = size;
-  }
-
-  /**
    * Gets crops.
    *
    * @return the crops

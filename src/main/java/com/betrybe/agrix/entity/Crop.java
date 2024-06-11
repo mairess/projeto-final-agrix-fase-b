@@ -121,15 +121,6 @@ public class Crop {
   }
 
   /**
-   * Sets planted area.
-   *
-   * @param plantedArea the planted area
-   */
-  public void setPlantedArea(double plantedArea) {
-    this.plantedArea = plantedArea;
-  }
-
-  /**
    * Gets farmId.
    *
    * @return the farmId
@@ -157,30 +148,12 @@ public class Crop {
   }
 
   /**
-   * Sets planted date.
-   *
-   * @param plantedDate the planted date
-   */
-  public void setPlantedDate(LocalDate plantedDate) {
-    this.plantedDate = plantedDate;
-  }
-
-  /**
    * Gets harvest date.
    *
    * @return the harvest date
    */
   public LocalDate getHarvestDate() {
     return harvestDate;
-  }
-
-  /**
-   * Sets harvest date.
-   *
-   * @param harvestDate the harvest date
-   */
-  public void setHarvestDate(LocalDate harvestDate) {
-    this.harvestDate = harvestDate;
   }
 
   public List<Fertilizer> getFertilizers() {

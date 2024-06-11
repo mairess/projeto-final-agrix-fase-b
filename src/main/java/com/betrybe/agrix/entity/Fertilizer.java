@@ -97,30 +97,12 @@ public class Fertilizer {
   }
 
   /**
-   * Sets brand.
-   *
-   * @param brand the brand
-   */
-  public void setBrand(String brand) {
-    this.brand = brand;
-  }
-
-  /**
    * Gets composition.
    *
    * @return the composition
    */
   public String getComposition() {
     return composition;
-  }
-
-  /**
-   * Sets composition.
-   *
-   * @param composition the composition
-   */
-  public void setComposition(String composition) {
-    this.composition = composition;
   }
 
   /**
