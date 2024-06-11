@@ -2,6 +2,7 @@ package com.betrybe.agrix.controller;
 
 import com.betrybe.agrix.controller.dto.CropDto;
 import com.betrybe.agrix.entity.Crop;
+import com.betrybe.agrix.entity.Fertilizer;
 import com.betrybe.agrix.service.CropService;
 import com.betrybe.agrix.service.exception.CropNotFoundException;
 import com.betrybe.agrix.service.exception.FertilizerNotFoundException;
@@ -107,5 +108,18 @@ public class CropController {
   public String addCropFertilizer(@PathVariable Long cropId, @PathVariable Long fertilizerId)
       throws CropNotFoundException, FertilizerNotFoundException {
     return cropService.addFertilizer(cropId, fertilizerId);
+  }
+
+  /**
+   * Gets crop fertilizers.
+   *
+   * @param cropId the crop id
+   * @return the crop fertilizers
+   * @throws CropNotFoundException the crop not found exception
+   */
+  @GetMapping("/{cropId}/fertilizers")
+  public List<Fertilizer> getCropFertilizers(@PathVariable Long cropId)
+      throws CropNotFoundException {
+    return cropService.findAllCropFertilizersById(cropId);
   }
 }

@@ -1,14 +1,13 @@
 package com.betrybe.agrix.entity;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,13 +27,9 @@ public class Fertilizer {
 
   private String composition;
 
-  @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(
-      name = "crop_fertilizers",
-      joinColumns = @JoinColumn(name = "fertilizer_id"),
-      inverseJoinColumns = @JoinColumn(name = "crop_id")
-  )
-  private List<Crop> crops;
+  @ManyToMany(mappedBy = "fertilizers")
+  @JsonIgnore
+  private List<Crop> crops = new ArrayList<>();
 
   /**
    * Instantiates a new Fertilizer.
@@ -126,5 +121,23 @@ public class Fertilizer {
    */
   public void setComposition(String composition) {
     this.composition = composition;
+  }
+
+  /**
+   * Gets crops.
+   *
+   * @return the crops
+   */
+  public List<Crop> getCrops() {
+    return crops;
+  }
+
+  /**
+   * Sets crops.
+   *
+   * @param crops the crops
+   */
+  public void setCrops(List<Crop> crops) {
+    this.crops = crops;
   }
 }
