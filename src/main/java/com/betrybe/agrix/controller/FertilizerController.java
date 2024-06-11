@@ -1,10 +1,17 @@
 package com.betrybe.agrix.controller;
 
+import com.betrybe.agrix.controller.dto.CropDto;
+import com.betrybe.agrix.controller.dto.FarmDto;
 import com.betrybe.agrix.controller.dto.FertilizerCreationDto;
 import com.betrybe.agrix.controller.dto.FertilizerDto;
 import com.betrybe.agrix.entity.Fertilizer;
 import com.betrybe.agrix.service.FertilizerService;
 import com.betrybe.agrix.service.exception.FertilizerNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +50,11 @@ public class FertilizerController {
    * @throws FertilizerNotFoundException the fertilizer not found exception
    */
   @GetMapping("/{fertilizerId}")
+  @Operation(summary = "Gets fertilizer by id", description = "Returns a fertilizer by its id.")
+  @ApiResponse(
+      responseCode = "200",
+      description = "The fertilizer",
+      content = @Content(schema = @Schema(implementation = FertilizerDto.class)))
   public FertilizerDto getFertilizerById(@PathVariable Long fertilizerId)
       throws FertilizerNotFoundException {
     return FertilizerDto.fromEntity(
@@ -56,6 +68,11 @@ public class FertilizerController {
    * @return the list
    */
   @GetMapping
+  @Operation(summary = "Gets all fertilizers", description = "Returns all available fertilizers.")
+  @ApiResponse(
+      responseCode = "200",
+      description = "All fertilizers",
+      content = @Content(array = @ArraySchema(schema = @Schema(implementation = FarmDto.class))))
   public List<FertilizerDto> allFertilizers() {
     List<Fertilizer> allFertilizers = fertilizerService.allFertilizers();
     return allFertilizers.stream().map(FertilizerDto::fromEntity).toList();
@@ -69,6 +86,11 @@ public class FertilizerController {
    */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
+  @Operation(summary = "Creates fertilizer", description = "Cretes new fertilizer")
+  @ApiResponse(
+      responseCode = "201",
+      description = "Created fertilizer",
+      content = @Content(schema = @Schema(implementation = CropDto.class)))
   public FertilizerDto createFertilizer(@RequestBody FertilizerCreationDto fertilizerCreationDto) {
     return FertilizerDto.fromEntity(
         fertilizerService.create(fertilizerCreationDto.toEntity())

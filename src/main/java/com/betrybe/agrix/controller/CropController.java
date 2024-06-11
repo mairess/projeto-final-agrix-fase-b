@@ -1,6 +1,7 @@
 package com.betrybe.agrix.controller;
 
 import com.betrybe.agrix.controller.dto.CropDto;
+import com.betrybe.agrix.controller.dto.FertilizerDto;
 import com.betrybe.agrix.entity.Crop;
 import com.betrybe.agrix.entity.Fertilizer;
 import com.betrybe.agrix.service.CropService;
@@ -85,6 +86,11 @@ public class CropController {
    * @return the list
    */
   @GetMapping("/search")
+  @Operation(summary = "Crops by harvestDate", description = "Returns crops by its harvestDate.")
+  @ApiResponse(
+      responseCode = "200",
+      description = "All crops",
+      content = @Content(array = @ArraySchema(schema = @Schema(implementation = CropDto.class))))
   public List<CropDto> harvestDateAtCrops(
       @RequestParam LocalDate start,
       @RequestParam LocalDate end) {
@@ -105,6 +111,11 @@ public class CropController {
    */
   @PostMapping("/{cropId}/fertilizers/{fertilizerId}")
   @ResponseStatus(HttpStatus.CREATED)
+  @Operation(summary = "Associates crop fertilizer", description = "Makes the association")
+  @ApiResponse(
+      responseCode = "201",
+      description = "Associated",
+      content = @Content(schema = @Schema(type = "string")))
   public String addCropFertilizer(@PathVariable Long cropId, @PathVariable Long fertilizerId)
       throws CropNotFoundException, FertilizerNotFoundException {
     return cropService.addFertilizer(cropId, fertilizerId);
@@ -118,6 +129,13 @@ public class CropController {
    * @throws CropNotFoundException the crop not found exception
    */
   @GetMapping("/{cropId}/fertilizers")
+  @Operation(summary = "Fertilizers by crop", description = "Returns Fertilizers by its crop.")
+  @ApiResponse(
+      responseCode = "200",
+      description = "All fertilizers",
+      content = @Content(array = @ArraySchema(
+          schema = @Schema(implementation = FertilizerDto.class)
+      )))
   public List<Fertilizer> getCropFertilizers(@PathVariable Long cropId)
       throws CropNotFoundException {
     return cropService.findAllCropFertilizersById(cropId);
