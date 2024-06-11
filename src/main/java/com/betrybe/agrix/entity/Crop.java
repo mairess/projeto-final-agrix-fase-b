@@ -1,6 +1,5 @@
 package com.betrybe.agrix.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,7 +40,6 @@ public class Crop {
   private double plantedArea;
 
   @ManyToMany
-  @JsonIgnore
   @JoinTable(
       name = "crops_fertilizers",
       joinColumns = @JoinColumn(name = "fertilizer_id"),
@@ -51,7 +49,6 @@ public class Crop {
 
   @ManyToOne
   @JoinColumn(name = "farm_id")
-  @JsonIgnore
   private Farm farm;
 
   /**

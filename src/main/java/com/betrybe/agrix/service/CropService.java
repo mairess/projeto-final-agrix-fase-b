@@ -6,7 +6,6 @@ import com.betrybe.agrix.entity.Fertilizer;
 import com.betrybe.agrix.repository.CropRepository;
 import com.betrybe.agrix.service.exception.CropNotFoundException;
 import com.betrybe.agrix.service.exception.FertilizerNotFoundException;
-import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +91,6 @@ public class CropService {
    * @return the list
    * @throws CropNotFoundException the crop not found exception
    */
-  @Transactional
   public List<Fertilizer> findAllCropFertilizersById(Long cropId)
       throws CropNotFoundException {
     Crop crop = findById(cropId);
