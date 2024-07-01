@@ -37,7 +37,7 @@ http://localhost:8080/swagger-ui/index.html
 5. Rode o teste:
 
 ```BASH
-mvn run test
+mvn test
 ```
 
 ## Rode o projeto com docker
@@ -65,5 +65,5 @@ http://localhost:8080/swagger-ui/index.html
 4. Rode o teste:
 
 ```BASH
-mvn run test
+mvn test
 ```
